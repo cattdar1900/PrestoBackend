@@ -7,7 +7,7 @@ from .views import *
 router = routers.DefaultRouter()
 router.register(r'callservice',CallServiceViewSet)
 
-
+i = 555555
 
 urlpatterns = [
     url(r'^auth/',ObtainAuthToken.as_view()),
