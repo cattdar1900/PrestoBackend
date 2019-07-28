@@ -121,9 +121,10 @@ class Snack(models.Model):
          return self.name + " " + (str)(self.priceBase) + " " + self.exFood + " " + self.markets.name
 
 class OnMenu(models.Model):
-    foods = models.ForeignKey(Food,null =True,blank=True,on_delete = models.CASCADE)
-    drink = models.ForeignKey(Drink,null =True,blank=True,on_delete = models.CASCADE)
-    snack = models.ForeignKey(Snack,null =True,blank=True,on_delete = models.CASCADE)
+    foods = models.ForeignKey(Food,null =True,blank = True,on_delete = models.SET_NULL)
+    drink = models.ForeignKey(Drink,null =True,blank = True,on_delete = models.SET_NULL)
+    snack = models.ForeignKey(Snack,null =True,blank = True,on_delete = models.SET_NULL)
+    
 
 class Menu(models.Model):
     amount = models.PositiveIntegerField()

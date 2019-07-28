@@ -40,6 +40,10 @@ class MarketAPIView(generics.ListAPIView):
     serializer_class = MarketSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('food__name',)
+
+class MarketApiViewByMarket(viewsets.ModelViewSet):
+    queryset = Market.objects.all()
+    serializer_class = MarketSerializer
     
 
 # Create your views here.

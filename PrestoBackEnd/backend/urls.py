@@ -15,7 +15,8 @@ urlpatterns = [
     url(r'^food',FoodViewSetByMarketName.as_view(),name='food-list-market'),
     url(r'^callservices/(?P<id>\w+)$',CallServiceViewSet.as_view(),name='callservice-list'),
     url(r'^callservices',CallServiceByDetail.as_view({'get':'list'})),
-    url(r'^markets',MarketAPIView.as_view())
+    url(r'^markets',MarketAPIView.as_view()),
+    url(r'^marketlist',MarketApiViewByMarket.as_view({'get':'list'}))
     
     # url(r'^',include(router.urls))
 ]
