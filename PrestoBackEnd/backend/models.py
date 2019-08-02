@@ -124,23 +124,28 @@ class OnMenu(models.Model):
     foods = models.ForeignKey(Food,null =True,blank = True,on_delete = models.SET_NULL)
     drink = models.ForeignKey(Drink,null =True,blank = True,on_delete = models.SET_NULL)
     snack = models.ForeignKey(Snack,null =True,blank = True,on_delete = models.SET_NULL)
+    randomkey = models.CharField(max_length = 32)
+    def __str__(self):
+        return self.randomkey
     
+class FoodOption(models.Model):
+    option = models.ForeignKey(Option,null = True,on_delete=models.SET_NULL)
+    amout = models.PositiveIntegerField()
+    randomkey = models.CharField(max_length = 32)
+    def __str__(self):
+        return self.option.name + " " + (str)(self.option.price) + " บาท "
 
 class Menu(models.Model):
     amount = models.PositiveIntegerField()
-    onMenu = models.OneToOneField(OnMenu,on_delete = models.CASCADE)
+    onMenu = models.ForeignKey(OnMenu,null = True,blank = True,on_delete = models.SET_NULL)
+    foodOption = models.ForeignKey(FoodOption,null =True,blank = True,on_delete = models.SET_NULL)
     market = models.ForeignKey(Market,null = True,on_delete = models.SET_NULL)
     order = models.ForeignKey(Order,null = True,on_delete = models.SET_NULL)
     totalPriceMenu = models.PositiveIntegerField()
     def __str__(self):
-        return self.market.name +" "+ self.onMenu.foods.name + " จำนวน " + (str)(self.amount) + " ราคา " + (str)(self.totalPriceMenu)
+        return self.market.name +" " + (str)(self.amount) + " ราคา " + (str)(self.totalPriceMenu)
 
-class FoodOption(models.Model):
-    option = models.ForeignKey(Option,null = True,on_delete=models.SET_NULL)
-    menu = models.ForeignKey(Menu,null = True,on_delete = models.SET_NULL)
-    amout = models.PositiveIntegerField()
-    def __str__(self):
-        return self.option.name + " " + (str)(self.option.price) + " บาท "
+
 
 class StatusOrder(models.Model):
     #OneToOne

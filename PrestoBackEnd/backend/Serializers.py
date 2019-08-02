@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CallService,Rider,StateRider,StatusOrder,Menu,Market,FoodOption,Option,Order,Food,Drink,Snack
+from .models import CallService,Rider,StateRider,StatusOrder,Menu,Market,FoodOption,Option,Order,Food,Drink,Snack,OnMenu
 
 class CallServiceSerializer(serializers.ModelSerializer):
     class Meta :
@@ -42,3 +42,26 @@ class MarketSerializer(serializers.ModelSerializer):
         model = Market
         fields = ('id','name','location','timeToOpen','timeToClose','food')
 
+class SnackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Snack
+        fields = ("name","exFood","priceBase","markets")
+
+class DrinkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Drink
+        fields = ("name","typeDrinks","priceBase","markets")
+
+class OnMenuSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OnMenu
+        fields = ("foods","drink","snack","randomkey")
+class OptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Option
+        fields = ("name","price","typefoods","markets")
+
+class FoodOptionSerailizer(serializers.ModelSerializer):
+    class Meta:
+        model = FoodOption
+        fields = ("option","amout","randomkey")

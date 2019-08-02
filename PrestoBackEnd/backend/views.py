@@ -34,16 +34,40 @@ class FoodViewSetByMarketName(generics.ListCreateAPIView):
     serializer_class = FoodSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('markets__name',)
-
+#API find market by foodname
 class MarketAPIView(generics.ListAPIView):
     queryset = Market.objects.all()
     serializer_class = MarketSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('food__name',)
 
+#list market
 class MarketApiViewByMarket(viewsets.ModelViewSet):
     queryset = Market.objects.all()
     serializer_class = MarketSerializer
+
+#Create On menu
+class OnMenuCreate(generics.ListCreateAPIView):
+    queryset =  OnMenu.objects.all()
+    serializer_class = OnMenuSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('=randomkey',)
+    
+#API find Option by Markets
+class OptionByMarkets(generics.ListAPIView):
+    queryset = Option.objects.all()
+    serializer_class = OptionSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('markets__name',)
+
+#Create Food OP
+class FoodOptionCreate(generics.ListCreateAPIView):
+    queryset =  FoodOption.objects.all()
+    serializer_class = FoodOptionSerailizer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('=randomkey',)
+
+
     
 
 # Create your views here.
