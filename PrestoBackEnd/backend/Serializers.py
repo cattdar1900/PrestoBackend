@@ -34,7 +34,7 @@ class StatusOrderSerializer(serializers.ModelSerializer):
 class FoodSerializer(serializers.ModelSerializer):
     class Meta :
         model = Food
-        fields = ('id','name','exFood','priceBase','markets')
+        fields = ('id','name',"typefood",'exFood','priceBase','markets')
 
 class MarketSerializer(serializers.ModelSerializer):
     food = FoodSerializer(many=True, read_only=True)
@@ -45,12 +45,12 @@ class MarketSerializer(serializers.ModelSerializer):
 class SnackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snack
-        fields = ("name","exFood","priceBase","markets")
+        fields = ("name","typefood","exFood","priceBase","markets")
 
 class DrinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Drink
-        fields = ("name","typeDrinks","priceBase","markets")
+        fields = ("name","typefood","typeDrinks","priceBase","markets")
 
 class OnMenuSerializer(serializers.ModelSerializer):
     class Meta:
@@ -65,3 +65,13 @@ class FoodOptionSerailizer(serializers.ModelSerializer):
     class Meta:
         model = FoodOption
         fields = ("option","amout","randomkey")
+
+class OrderSerailizer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ('customer','address','phoneNumber','timeToSend','timeToOrder','totalPriceOrder','payments','callService')
+
+class MenuSerailizer(serializers.ModelSerializer):
+    class Meta:
+        model = Menu
+        fields = ('amount','onMenu','foodOption','market','order','totalPriceMenu')

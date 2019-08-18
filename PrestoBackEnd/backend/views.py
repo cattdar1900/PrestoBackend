@@ -67,7 +67,29 @@ class FoodOptionCreate(generics.ListCreateAPIView):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('=randomkey',)
 
-
+class OrderCreate(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerailizer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('=id',)
     
+class MenuCreate(generics.ListCreateAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerailizer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('=id',)
+
+class DrinkBymarket(generics.ListCreateAPIView):
+    queryset = Drink.objects.all()
+    serializer_class = DrinkSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('markets__name',)
+
+class SnackBymarket(generics.ListCreateAPIView):
+    queryset = Snack.objects.all()
+    serializer_class = SnackSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('markets__name',)
+
 
 # Create your views here.

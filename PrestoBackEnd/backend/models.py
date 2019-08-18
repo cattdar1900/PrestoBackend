@@ -17,7 +17,8 @@ foodtype = (
     ('food','อาหาร'),
     ('drink','เครื่องดื่ม'),
     ('snack','ของทานเล่น'),
-    ('bakery','ของหวาน')
+    ('bakery','ของหวาน'),
+    ('fruit','ผลไม้')
 )
 payment = (
     ('online','โอน'),
@@ -98,7 +99,8 @@ class Order(models.Model):
         return self.customer +" ส่งที่ "+ self.address
 class Food(models.Model):
     name = models.CharField(max_length = 50)
-    exFood = models.CharField(max_length = 20,choices = foodEX)
+    typefood = models.CharField(max_length = 50,choices = foodtype)
+    exFood = models.CharField(max_length = 20,  choices = foodEX)
     priceBase = models.PositiveIntegerField()
     markets = models.ForeignKey(Market,null = True,on_delete = models.SET_NULL)
     def __str__(self):
@@ -106,6 +108,7 @@ class Food(models.Model):
 
 class Drink(models.Model):
     name = models.CharField(max_length = 20)
+    typefood = models.CharField(max_length = 50,choices = foodtype)
     typeDrinks =models.CharField(max_length = 20,choices = typeDrink)
     priceBase = models.PositiveIntegerField()
     markets = models.ForeignKey(Market,null = True,on_delete = models.SET_NULL)
@@ -114,6 +117,7 @@ class Drink(models.Model):
 
 class Snack(models.Model):
     name = models.CharField(max_length = 20)
+    typefood = models.CharField(max_length = 50,choices = foodtype)
     exFood = models.CharField(max_length = 20,choices = foodEX)
     priceBase = models.PositiveIntegerField()
     markets = models.ForeignKey(Market,null = True,on_delete = models.SET_NULL)
@@ -142,8 +146,8 @@ class Menu(models.Model):
     market = models.ForeignKey(Market,null = True,on_delete = models.SET_NULL)
     order = models.ForeignKey(Order,null = True,on_delete = models.SET_NULL)
     totalPriceMenu = models.PositiveIntegerField()
-    def __str__(self):
-        return self.market.name +" " + (str)(self.amount) + " ราคา " + (str)(self.totalPriceMenu)
+    # def __str__(self):
+    #     return self.market.name +" " + (str)(self.amount) + " ราคา " + (str)(self.totalPriceMenu)
 
 
 
